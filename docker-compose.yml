@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nodered:
+    image: nginxinc/nginx-unprivileged
+    container_name: mynginx
+    volumes:
+      # This must be an absolute path. Change before execute
+      - /home/sklein/IdeaProjects/reverse-proxy-ipv6/default.conf:/etc/nginx/conf.d/default.conf
+      - /home/sklein/IdeaProjects/reverse-proxy-ipv6/certificate:/certificate
+    ports:
+      - "::1:81:8080"
+      - "::1:443:443"
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
